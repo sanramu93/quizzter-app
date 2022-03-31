@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap");
+/* Palette: https://coolors.co/palette/264653-2a9d8f-e9c46a-f4a261-e76f51 */
+
+/* -------------
+//  BASIC RESET
+--------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:root {
+  font-size: 62.5%;
+  /* Typography */
+  --ff-quick-sand: "Quicksand", sans-serif;
+
+  --fs-small: 1.6rem;
+  --fs-regular: 1.8rem;
+  --fs-big: 2rem;
+  --fs-huge: 4.2rem;
+
+  --fw-regular: 400;
+  --fw-medium: 600;
+  --fw-bold: 700;
+
+  /* Color */
+  --clr-green-dark: #192f37;
+  --clr-green-light: #2a9d8f;
+  --clr-orange: #e76f51;
+  --clr-orange-light: #f4a261;
+  --clr-yellow: #e9c46a;
+
+  /* Border Radius */
+  --br-regular: 4px;
+  --br-medium: 8px;
+}
+
+/* -------------
+//  GENERAL
+--------------- */
+
+body {
+  font-family: var(--ff-quick-sand);
+  font-size: var(--fs-regular);
+  font-weight: var(--fw-regular);
+  background-color: var(--clr-green-dark);
+  color: var(--clr-green-light);
+}
+
+button {
+  font-family: inherit;
+  font-size: var(--fs-big);
+  font-weight: var(--fw-medium);
+  background-color: var(--clr-green-dark);
+  border: 2px solid var(--clr-green-light);
+  border-radius: var(--br-medium);
+  color: var(--clr-yellow);
+  padding: 0.4em 0.8em;
+}
+
+/* -------------
+//  TYPOGRAPHY
+--------------- */
+h1 {
+  font-size: var(--fs-huge);
+  font-weight: var(--fw-bold);
+  color: var(--clr-green-light);
+}
+
+h2 {
+  font-size: var(--fs-big);
+}
+
+p {
+  font-size: var(--fs-regular);
+}
+
+.home__title {
+  margin-bottom: 0.3em;
+}
+
+.home__description {
+  margin-bottom: 2em;
+}
+
+/* -------------
+//  LAYOUT
+--------------- */
+.container {
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.home {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
