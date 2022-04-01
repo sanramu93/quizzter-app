@@ -1,2 +1,2 @@
-- Convert HTML questions and answers to readable text
-- Set show score functionality
+- Highlight correct answers
+- Highlight incorrect answers

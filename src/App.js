@@ -5,8 +5,8 @@ import Home from "./components/Home";
 import Quiz from "./components/Quiz";
 
 export default function App() {
-  const [showQuiz, setShowQuiz] = useState(false);
-  const [questions, setQUestions] = useState([]);
+  const [showQuiz, setShowQuiz] = useState(true);
+  const [questions, setQuestions] = useState([]);
   const [questionsAmount, setQuestionsAmount] = useState(5);
 
   const handleStartQuiz = () => {
@@ -16,17 +16,17 @@ export default function App() {
   useEffect(() => {
     const getQuestions = async () => {
       const data = await fetchQuestions(questionsAmount);
-      setQUestions(data.results);
+      setQuestions(data.results);
     };
     getQuestions();
-  }, []);
+  }, [showQuiz]);
 
   return (
     <main className="container">
       {!showQuiz ? (
         <Home handleStartQuiz={handleStartQuiz} />
       ) : (
-        <Quiz questions={questions} />
+        <Quiz questions={questions} setShowQuiz={setShowQuiz} />
       )}
     </main>
   );

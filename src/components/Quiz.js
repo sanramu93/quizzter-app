@@ -1,14 +1,26 @@
 import { useState, useEffect } from "react";
 import Question from "./Question";
 
-export default function Quiz({ questions }) {
+export default function Quiz({ questions, setShowQuiz }) {
   const [isCorrect, setIsCorrect] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState([]);
   const [score, setScore] = useState(0);
+  const [showScore, setShowScore] = useState(false);
+  const [questionDisabled, setQuestionDisabled] = useState(false);
 
   const handleCheckAnswers = () => {
     setScore(correctAnswers.reduce((a, b) => a + b));
+    setShowScore(true);
+    setQuestionDisabled(true);
+  };
+
+  const handlePlayAgain = () => {
+    setShowScore(false);
+    setCorrectAnswers(Array(questions.length).fill(0));
+    setQuestionDisabled(false);
+    setShowQuiz(false);
+    window.scrollTo(0, 0);
   };
 
   const renderQuestions = () => {
@@ -18,6 +30,8 @@ export default function Quiz({ questions }) {
         index={i}
         setCurrentQuestion={setCurrentQuestion}
         setIsCorrect={setIsCorrect}
+        showScore={showScore}
+        questionDisabled={questionDisabled}
         key={q.question}
       />
     ));
@@ -37,10 +51,29 @@ export default function Quiz({ questions }) {
   return (
     <section className="quiz">
       {renderQuestions()}
-      <div className="btn-wrapper">
-        <button className="btn--check-answers" onClick={handleCheckAnswers}>
-          CheckAnswers
-        </button>
+      <div className="quiz__bottom">
+        {!showScore ? (
+          <button
+            className="btn btn--check-answers "
+            onClick={handleCheckAnswers}
+          >
+            Check Answers
+          </button>
+        ) : (
+          <>
+            <div className="quiz__score">
+              <h2 className="score__message">
+                You scored <span className="score__num">{score}</span>
+                <span className="score__num-slash">/</span>
+                <span className="score__num">{questions.length}</span> correct
+                answers
+              </h2>
+            </div>
+            <button className="btn btn--play-again" onClick={handlePlayAgain}>
+              Play Again
+            </button>
+          </>
+        )}
       </div>
     </section>
   );

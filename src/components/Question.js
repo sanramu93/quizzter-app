@@ -1,17 +1,37 @@
 import { useState, useEffect } from "react";
-import decodeHtml from "decode-html";
+import HTMLDecoderEncoder from "html-encoder-decoder";
 
 export default function Question({
   question,
   setIsCorrect,
   setCurrentQuestion,
   index,
+  showScore,
+  questionDisabled,
 }) {
   const [correct, setCorrect] = useState("");
   const [options, setOptions] = useState([]);
   const [selected, setSelected] = useState("");
 
   const shuffleOptions = (arr) => arr.sort(() => Math.random() - 0.5);
+
+  const decodeHtml = (str) => HTMLDecoderEncoder.decode(str);
+
+  const highlightSelected = (option) => {
+    if (showScore && option === selected) {
+      return option === correct
+        ? "question__opt--correct"
+        : "question__opt--incorrect";
+    } else {
+      return option === selected && "question__opt--selected";
+    }
+  };
+
+  const highlightCorrect = (option) => {
+    if (showScore) {
+      return option === correct ? "question__opt--correct" : "";
+    }
+  };
 
   const handleSelect = (e) => {
     setCurrentQuestion(index);
@@ -30,14 +50,15 @@ export default function Question({
   const renderOptions = () => {
     return options.map((opt) => (
       <button
-        className={`question__opt ${
-          opt === selected && "question__opt--selected"
-        }`}
+        className={`btn question__opt ${highlightSelected(
+          opt
+        )} ${highlightCorrect(opt)} `}
         key={opt}
         onClick={handleSelect}
         value={opt}
+        disabled={questionDisabled}
       >
-        {opt}
+        {decodeHtml(opt)}
       </button>
     ));
   };
