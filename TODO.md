@@ -1,0 +1,2 @@
+- Convert HTML questions and answers to readable text
+- Set show score functionality
