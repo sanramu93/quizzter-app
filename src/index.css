@@ -149,33 +149,39 @@ strong {
   justify-content: center;
   align-items: center;
 }
+.btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
 
 /* -------------
 //  QUIZ SETUP
 --------------- */
-.category__tags {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5em;
+.quiz-setup__inputs {
+  margin-bottom: 6rem;
 }
 
-.category__tag {
-  padding: 0.3em 1.3em;
-  font-size: var(--fs-small);
-  color: var(--clr-orange);
-  border: solid 1px var(--clr-orange);
+.quiz-setup__select {
+  font-family: var(--ff-quick-sand);
+  font-size: var(--fs-regular);
+  padding: 0.3em;
   background-color: var(--clr-green-dark);
   border-radius: var(--br-regular);
-  opacity: 0.8;
+  border: solid 1px var(--clr-orange);
+  color: var(--clr-yellow);
+  width: 100%;
+}
+
+.quiz-setup__select__opt {
+  font-size: var(--fs-small);
 }
 
 .amount__wrapper {
   display: flex;
-  justify-content: center;
 }
 
 .amount__input {
+  width: 100%;
   font-size: var(--fs-regular);
   color: var(--clr-yellow);
   padding: 0.5em;
