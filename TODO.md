@@ -1,2 +1,2 @@
-- Highlight correct answers
-- Highlight incorrect answers
+- Add categories and difficulty feature
+- Add timer
