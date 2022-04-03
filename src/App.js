@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { fetchQuestions, fetchCategories } from "./apis/opentdb";
 import Home from "./components/Home";
 import QuizSetup from "./components/QuizSetup";
