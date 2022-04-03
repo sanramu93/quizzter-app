@@ -5,6 +5,8 @@ export default function QuizSetup({
   questionsAmount,
   handleSelect,
   handleAmountChange,
+  handleStartQuiz,
+  setQuestionsAmount,
 }) {
   const renderCategories = () => {
     return allCategories.map((cat) => (
@@ -76,22 +78,23 @@ export default function QuizSetup({
         </div>
         <div className="amount">
           <h2 className="quiz-setup__title">
-            Amount of Questions <br /> (5-50)
+            Amount of Questions <br /> (1-50)
           </h2>
           <div className="amount__wrapper">
             <input
               className="amount__input"
               type="number"
-              min="5"
+              min="1"
               max="50"
               value={questionsAmount}
-              onInput={handleAmountChange}
+              onFocus={() => setQuestionsAmount("")}
+              onChange={handleAmountChange}
             />
           </div>
         </div>
       </div>
       <div className="btn-wrapper">
-        <Link to="/quiz" className="btn">
+        <Link to="/quiz" className="btn" onClick={handleStartQuiz}>
           Start
         </Link>
       </div>

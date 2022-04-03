@@ -1,2 +1,1 @@
-- Add categories and difficulty feature
-- Add timer
+- Fix Amount questions bug

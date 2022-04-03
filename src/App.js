@@ -6,6 +6,7 @@ import QuizSetup from "./components/QuizSetup";
 import Quiz from "./components/Quiz";
 
 export default function App() {
+  const [showQuiz, setShowQuiz] = useState(false);
   const [allCategories, setAllCategories] = useState([]);
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
@@ -13,16 +14,34 @@ export default function App() {
   const [questionsAmount, setQuestionsAmount] = useState(5);
   const [questions, setQuestions] = useState([]);
 
+  const handleStartQuiz = () => {
+    setShowQuiz(true);
+  };
+
+  const handlePlayAgain = () => {
+    setShowQuiz(false);
+  };
+
   const handleSelect = (e) => {
     const { name, value } = e.target;
-    if (name === "category") setCategory(e.target.value);
-    if (name === "difficulty") setDifficulty(e.target.value);
-    if (name === "type") setType(e.target.value);
+    if (name === "category") setCategory(value);
+    if (name === "difficulty") setDifficulty(value);
+    if (name === "type") setType(value);
   };
 
   const handleAmountChange = (e) => {
-    setQuestionsAmount(e.target.value);
+    let { min, max, value } = e.target;
+    value = Math.max(Number(min), Math.min(Number(max), Number(value)));
+    setQuestionsAmount(value);
   };
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const data = await fetchCategories();
+      setAllCategories(data.trivia_categories);
+    };
+    getCategories();
+  }, []);
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -35,15 +54,9 @@ export default function App() {
       setQuestions(data.results);
     };
     getQuestions();
-  }, [category, questionsAmount, difficulty, type]);
 
-  useEffect(() => {
-    const getCategories = async () => {
-      const data = await fetchCategories();
-      setAllCategories(data.trivia_categories);
-    };
-    getCategories();
-  }, []);
+    return () => setQuestions([]);
+  }, [showQuiz]);
 
   return (
     <Router>
@@ -56,12 +69,18 @@ export default function App() {
             <QuizSetup
               allCategories={allCategories}
               questionsAmount={questionsAmount}
+              handleStartQuiz={handleStartQuiz}
               handleSelect={handleSelect}
               handleAmountChange={handleAmountChange}
+              setQuestionsAmount={setQuestionsAmount}
             />
           </Route>
           <Route path="/quiz">
-            <Quiz questions={questions} />
+            <Quiz
+              questions={questions}
+              handlePlayAgain={handlePlayAgain}
+              setShowQuiz={setShowQuiz}
+            />
           </Route>
         </Switch>
       </main>

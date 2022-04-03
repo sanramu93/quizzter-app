@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Question from "./Question";
 
-export default function Quiz({ questions }) {
+export default function Quiz({ questions, setShowQuiz }) {
   const [isCorrect, setIsCorrect] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState([]);
@@ -14,12 +14,16 @@ export default function Quiz({ questions }) {
     setScore(correctAnswers.reduce((a, b) => a + b));
     setShowScore(true);
     setQuestionDisabled(true);
+
+    // Scroll to bottom
+    window.scrollTo(0, document.body.scrollHeight);
   };
 
   const handlePlayAgain = () => {
     setShowScore(false);
     setCorrectAnswers(Array(questions.length).fill(0));
     setQuestionDisabled(false);
+    setShowQuiz(false);
     window.scrollTo(0, 0);
   };
 
