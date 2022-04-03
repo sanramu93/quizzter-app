@@ -5,7 +5,7 @@ export default function Home() {
     <section className="home">
       <h1 className="home__title">Quizzter</h1>
       <p className="home__description">
-        Unlocking knowledge at the speed of <strong>thought.</strong>
+        Unlocking knowledge at the <br /> speed of <strong>thought.</strong>
       </p>
       <Link to="/setup" className="btn">
         Start Quiz

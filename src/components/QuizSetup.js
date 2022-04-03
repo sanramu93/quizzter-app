@@ -59,7 +59,7 @@ export default function QuizSetup({
 
         {/* Type */}
         <div className="type">
-          <h2 className="quiz-setup__title">Difficulty</h2>
+          <h2 className="quiz-setup__title">Type</h2>
           <select
             onChange={handleSelect}
             name="type"
