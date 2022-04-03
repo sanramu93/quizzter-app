@@ -1,11 +1,10 @@
+import { Link } from "react-router-dom";
+
 export default function QuizSetup({
   allCategories,
   questionsAmount,
-  handleCategorySelect,
-  handleDifficultySelect,
-  handleTypeSelect,
+  handleSelect,
   handleAmountChange,
-  handleStartQuiz,
 }) {
   const renderCategories = () => {
     return allCategories.map((cat) => (
@@ -22,8 +21,8 @@ export default function QuizSetup({
         <div className="category">
           <h2 className="quiz-setup__title">Category</h2>
           <select
-            onChange={handleCategorySelect}
-            name="categories"
+            onChange={handleSelect}
+            name="category"
             className="quiz-setup__select"
           >
             <option className="quiz-setup__select__opt" value="">
@@ -37,7 +36,7 @@ export default function QuizSetup({
         <div className="difficulty">
           <h2 className="quiz-setup__title">Difficulty</h2>
           <select
-            onChange={handleDifficultySelect}
+            onChange={handleSelect}
             name="difficulty"
             className="quiz-setup__select"
           >
@@ -60,7 +59,7 @@ export default function QuizSetup({
         <div className="type">
           <h2 className="quiz-setup__title">Difficulty</h2>
           <select
-            onChange={handleTypeSelect}
+            onChange={handleSelect}
             name="type"
             className="quiz-setup__select"
           >
@@ -92,9 +91,9 @@ export default function QuizSetup({
         </div>
       </div>
       <div className="btn-wrapper">
-        <button onClick={handleStartQuiz} className="btn">
+        <Link to="/quiz" className="btn">
           Start
-        </button>
+        </Link>
       </div>
     </section>
   );

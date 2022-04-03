@@ -1,39 +1,23 @@
 import { useState, useEffect } from "react";
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { fetchQuestions, fetchCategories } from "./apis/opentdb";
 import Home from "./components/Home";
 import QuizSetup from "./components/QuizSetup";
 import Quiz from "./components/Quiz";
 
 export default function App() {
-  const [showQuizSetup, setShowQuizSetup] = useState(false);
-  const [showQuiz, setShowQuiz] = useState(false);
   const [allCategories, setAllCategories] = useState([]);
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [type, setType] = useState("");
-  const [questions, setQuestions] = useState([]);
   const [questionsAmount, setQuestionsAmount] = useState(5);
+  const [questions, setQuestions] = useState([]);
 
-  const handleStartQuizSetup = () => {
-    setShowQuizSetup(true);
-  };
-
-  const handleStartQuiz = () => {
-    setShowQuizSetup(false);
-    setShowQuiz(true);
-  };
-
-  const handleCategorySelect = (e) => {
-    setCategory(e.target.value);
-  };
-
-  const handleDifficultySelect = (e) => {
-    setDifficulty(e.target.value);
-  };
-
-  const handleTypeSelect = (e) => {
-    setType(e.target.value);
+  const handleSelect = (e) => {
+    const { name, value } = e.target;
+    if (name === "category") setCategory(e.target.value);
+    if (name === "difficulty") setDifficulty(e.target.value);
+    if (name === "type") setType(e.target.value);
   };
 
   const handleAmountChange = (e) => {
@@ -51,7 +35,7 @@ export default function App() {
       setQuestions(data.results);
     };
     getQuestions();
-  }, [showQuiz, category, questionsAmount, difficulty, type]);
+  }, [category, questionsAmount, difficulty, type]);
 
   useEffect(() => {
     const getCategories = async () => {
@@ -59,35 +43,28 @@ export default function App() {
       setAllCategories(data.trivia_categories);
     };
     getCategories();
-  }, [showQuizSetup]);
+  }, []);
 
   return (
-    <main className="container">
-      {/* {!showQuizSetup ? (
-        <Home handleStartQuizSetup={handleStartQuizSetup} />
-      ) : (
-        <QuizSetup
-          allCategories={allCategories}
-          questionsAmount={questionsAmount}
-          handleCategorySelect={handleCategorySelect}
-          handleDifficultySelect={handleDifficultySelect}
-          handleTypeSelect={handleTypeSelect}
-          handleAmountChange={handleAmountChange}
-          handleStartQuiz={handleStartQuiz}
-        />
-      )} */}
-      <Home handleStartQuizSetup={handleStartQuizSetup} />
-
-      <QuizSetup
-        allCategories={allCategories}
-        questionsAmount={questionsAmount}
-        handleCategorySelect={handleCategorySelect}
-        handleDifficultySelect={handleDifficultySelect}
-        handleTypeSelect={handleTypeSelect}
-        handleAmountChange={handleAmountChange}
-        handleStartQuiz={handleStartQuiz}
-      />
-      <Quiz questions={questions} setShowQuiz={setShowQuiz} />
-    </main>
+    <Router>
+      <main className="container">
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/setup">
+            <QuizSetup
+              allCategories={allCategories}
+              questionsAmount={questionsAmount}
+              handleSelect={handleSelect}
+              handleAmountChange={handleAmountChange}
+            />
+          </Route>
+          <Route path="/quiz">
+            <Quiz questions={questions} />
+          </Route>
+        </Switch>
+      </main>
+    </Router>
   );
 }

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Question from "./Question";
 
-export default function Quiz({ questions, setShowQuiz }) {
+export default function Quiz({ questions }) {
   const [isCorrect, setIsCorrect] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState([]);
@@ -19,7 +20,6 @@ export default function Quiz({ questions, setShowQuiz }) {
     setShowScore(false);
     setCorrectAnswers(Array(questions.length).fill(0));
     setQuestionDisabled(false);
-    setShowQuiz(false);
     window.scrollTo(0, 0);
   };
 
@@ -69,9 +69,13 @@ export default function Quiz({ questions, setShowQuiz }) {
                 answers
               </h2>
             </div>
-            <button className="btn btn--play-again" onClick={handlePlayAgain}>
+            <Link
+              to="/"
+              className="btn btn--play-again"
+              onClick={handlePlayAgain}
+            >
               Play Again
-            </button>
+            </Link>
           </>
         )}
       </div>

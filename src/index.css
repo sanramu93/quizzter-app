@@ -88,6 +88,10 @@ p {
   font-size: var(--fs-regular);
 }
 
+a {
+  text-decoration: none;
+}
+
 strong {
   font-weight: var(--fw-regular);
 }
