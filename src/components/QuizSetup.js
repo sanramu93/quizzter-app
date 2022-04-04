@@ -76,6 +76,7 @@ export default function QuizSetup({
             </option>
           </select>
         </div>
+        {/* Amount */}
         <div className="amount">
           <h2 className="quiz-setup__title">
             Amount of Questions <br /> (1-50)
@@ -87,8 +88,17 @@ export default function QuizSetup({
               min="1"
               max="50"
               value={questionsAmount}
-              onFocus={() => setQuestionsAmount("")}
               onChange={handleAmountChange}
+              onKeyDown={(e) => {
+                if (e.code === "Backspace" || e.code === "Delete") {
+                  setQuestionsAmount("");
+                }
+              }}
+              onFocus={() => setQuestionsAmount("")}
+              onBlur={(e) => {
+                const { min, value } = e.target;
+                if (!value) setQuestionsAmount(min);
+              }}
             />
           </div>
         </div>

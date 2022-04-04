@@ -167,7 +167,7 @@ a {
 .amount__input {
   background-color: var(--clr-green-dark);
 
-  border: solid 1px var(--clr-orange);
+  border: solid 2px var(--clr-orange);
   color: var(--clr-yellow);
   width: 100%;
   font-size: var(--fs-regular);
@@ -207,7 +207,7 @@ a {
   font-size: var(--fs-regular);
   font-weight: var(--fw-regular);
   padding: 0.5em 1em;
-  border: solid 1px var(--clr-white);
+  border: solid 2px var(--clr-white);
   color: var(--clr-white);
   opacity: 0.6;
 }
