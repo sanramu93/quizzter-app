@@ -24,8 +24,8 @@ Quiz app designed in React with added features including: category filters and a
 
 In the project directory, you can run:
 
--npm install: Install dependencies
--npm start: Runs the app in the development mode.
+- npm install: Install dependencies
+- npm start: Runs the app in the development mode.
 
 ## Links
 
